@@ -4,24 +4,71 @@ const generateHTML = require('./utils/generateHTML');
 
 const questions = () => {
     return inquirer.prompt([
-
-        // Title Section
+        // Manger Section
+        // Name Section
         {
             type: 'input',
-            name: 'name',
+            name: 'managerName',
             message: 'What is the title of your application?'
         },
-        // GitHub username
+        // Employee ID Section
         {
             type: 'input',
-            name: 'username',
+            name: 'managerId',
+            message: 'What is your employee ID number?'
+        },
+        // Email
+        {
+            type: 'input',
+            name: 'managerEmail',
+            message: 'What is your email address?'
+        },
+        // Office Number Section
+        {
+            type: 'input',
+            name: 'manageOffice',
+            message: 'What is your office number?'
+        }
+
+        
+        // Employee Section
+        // Role Selection
+        {
+            type: 'input',
+            name: 'employeeRole',
+            message: 'What is the role of this team member?'
+        },
+        // Name Section
+        {
+            type: 'input',
+            name: 'employeeName',
+            message: 'What is the title of your application?'
+        },
+        // Employee ID Section
+        {
+            type: 'input',
+            name: 'employeeId',
+            message: 'What is your employee ID number?'
+        },
+        // Email
+        {
+            type: 'input',
+            name: 'employeeEmail',
+            message: 'What is your email address?'
+        },
+
+        // Corresponding role questions
+        // GitHub Section, if "engineer"
+        {
+            type: 'input',
+            name: 'employeeGitHub',
             message: 'What is your GitHub username?'
         },
-        // email
+        // School section, if "intern"
         {
             type: 'input',
-            name: 'email',
-            message: 'What is your email address?'
+            name: 'employeeSchool',
+            message: 'What school does this team member attend?'
         }
     ])
 
@@ -30,9 +77,9 @@ const questions = () => {
         return generateHTML(data);
     })
 
-    // name the file to README.md
-    .then(generatedReadme => {
-        return writeToFile('README.md', generatedReadme);
+    // name the file to index.html
+    .then(generatedIndex => {
+        return writeToFile('index.html', generatedIndex);
     })
     
     // log error is any occur
@@ -41,13 +88,13 @@ const questions = () => {
     })
 };
 
-// write readme file into ./generated folder
+// write html file into ./generated folder
 const writeToFile = (fileName, data) => {
     fs.writeFile(`./generated/${fileName}`, data, err => {
         if (err) {
             throw err;
         };
-        console.log('Your README.md file has been generated.')
+        console.log('Your index.html file has been generated.')
     });
 }
 
