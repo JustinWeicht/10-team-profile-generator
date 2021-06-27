@@ -23,30 +23,38 @@
         <!-- manager's section -->
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">${data.managerName}</h5>
+                <h5 class="card-title">${manager.name}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Manager</h6>            
-                <p class="card-text">ID: ${managerId}</p>
+                <p class="card-text">ID: ${manager.id}</p>
 
                 <!-- TODO: open email in default email program and fill in recipient -->
-                <p class="card-text">Email: <a href="${data.managerEmail}" target="_blank">${data.managerEmail}</a></p>
+                <p class="card-text">Email: <a href="mailto:${manager.email}">${manager.email}</a></p>
 
-                <p class="card-text">Office Number: ${managerOffice}</p>
+                <p class="card-text">Office Number: ${manager.officeNumber}</p>
+            </div>
+        </div>
+        
+        <!-- TODO: generate corresponding card based on role selection -->
+        <!-- employee section -->
+        <!-- engineer card -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">${engineer.name}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${engineer.role}</h6>     
+                <p class="card-text">ID: ${engineer.id}</p>
+                <p class="card-text">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></p>
+                <p>GitHub: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></p>
             </div>
         </div>
 
-        <!-- TODO: generate from teamArray -->
-        <!-- employee section -->
+        <!-- intern card -->
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">${data.employeeName}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${employeeRole}</h6>     
-                <p class="card-text">ID: ${data.employeeId}</p>
-                <p class="card-text">Email: <a href="${data.employeeEmail}" target="_blank">${data.employeeEmail}</a></p>
-
-                <!-- TODO: add corresponding role question from .js -->
-                <p>GitHub: <a href="https://github.com/${data.engineerGithub}" target="_blank">${data.engineerGithub}</a></p>
-                <!-- or -->
-                <p class="card-text">School: ${data.internSchool}</p>
+                <h5 class="card-title">${intern.name}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${intern.role}</h6>     
+                <p class="card-text">ID: ${intern.id}</p>
+                <p class="card-text">Email: <a href="mailto:${intern.email}">${intern.email}</a></p>
+                <p class="card-text">School: ${intern.school}</p>
             </div>
         </div>
     </div>
