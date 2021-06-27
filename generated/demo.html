@@ -23,11 +23,14 @@
         <!-- manager's section -->
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">Team Manager</h5>
-                <p class="card-text">Name: ${managerName}</p>
-                <p class="card-text">Employee ID: ${managerId}</p>
+                <h5 class="card-title">${data.managerName}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Manager</h6>            
+                <p class="card-text">ID: ${managerId}</p>
+
+                <!-- TODO: open email in default email program and fill in recipient -->
+                <p class="card-text">Email: <a href="${data.managerEmail}" target="_blank">${data.managerEmail}</a></p>
+
                 <p class="card-text">Office Number: ${managerOffice}</p>
-                <a href="${managerEmail}" class="card-link">Email</a>
             </div>
         </div>
 
@@ -35,22 +38,17 @@
         <!-- employee section -->
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">${data.employeeRole}</h5>
-                <p class="card-text">Name: ${data.employeeName}</p>
-                <p class="card-text">Employee ID: ${data.employeeId}</p>
+                <h5 class="card-title">${data.employeeName}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${employeeRole}</h6>     
+                <p class="card-text">ID: ${data.employeeId}</p>
+                <p class="card-text">Email: <a href="${data.employeeEmail}" target="_blank">${data.employeeEmail}</a></p>
 
                 <!-- TODO: add corresponding role question from .js -->
-                <p class="card-text">GitHub: ${data.employeeGitHub}</p>
+                <p>GitHub: <a href="https://github.com/${data.engineerGitHub}" target="_blank">${data.engineerGitHub}</a></p>
                 <!-- or -->
-                <p class="card-text">School: ${data.employeeSchool}</p>
-
-
-                <a href="${employeeEmail}" class="card-link">Email</a>
+                <p class="card-text">School: ${data.internSchool}</p>
             </div>
         </div>
     </div>
 </body>
 </html>
-
-<!-- TODO: create sections to hold required inputs? --> 
-<!-- TODO: test if inline bootstrap ids and classes can be applied from this .html -->

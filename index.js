@@ -4,71 +4,81 @@ const generateHTML = require('./utils/generateHTML');
 
 const questions = () => {
     return inquirer.prompt([
-        // Manger Section
-        // Name Section
+        // Manger section
+        // Name section
         {
             type: 'input',
-            name: 'managerName',
-            message: 'What is the title of your application?'
+            name: 'name',
+            message: 'Please enter the name of the team manager.'
         },
-        // Employee ID Section
+        // ID section
         {
             type: 'input',
-            name: 'managerId',
-            message: 'What is your employee ID number?'
+            name: 'id',
+            message: 'What is their ID number?'
         },
-        // Email
+        // Email section
         {
             type: 'input',
-            name: 'managerEmail',
-            message: 'What is your email address?'
+            name: 'email',
+            message: 'What is their email address?'
         },
-        // Office Number Section
+        // Office Number section
         {
             type: 'input',
-            name: 'manageOffice',
-            message: 'What is your office number?'
+            name: 'office',
+            message: 'What is their office number?'
         }
 
+    .then(console.log('Please enter the information for the next team member.'))
         
-        // Employee Section
-        // Role Selection
+        // Employee section
+        // Role selection
         {
-            type: 'input',
-            name: 'employeeRole',
-            message: 'What is the role of this team member?'
+            type: 'list',
+            name: 'role',
+            message: 'What is the role of this team member?',
+            choices: ['Engineer', 'Intern']
         },
-        // Name Section
+        // Name section
         {
             type: 'input',
-            name: 'employeeName',
-            message: 'What is the title of your application?'
+            name: 'name',
+            message: 'What is the name of this employee?'
         },
-        // Employee ID Section
+        // ID section, 
         {
             type: 'input',
-            name: 'employeeId',
-            message: 'What is your employee ID number?'
+            name: 'id',
+            message: 'What is their ID number?'
         },
-        // Email
+        // Email section
         {
             type: 'input',
-            name: 'employeeEmail',
-            message: 'What is your email address?'
+            name: 'email',
+            message: 'What is their email address?'
         },
 
         // Corresponding role questions
-        // GitHub Section, if "engineer"
+        // GitHub section, if "engineer" role is selected
         {
             type: 'input',
-            name: 'employeeGitHub',
-            message: 'What is your GitHub username?'
+            name: 'gitHub',
+            message: 'What is their GitHub username?'
         },
-        // School section, if "intern"
+        // School section, if "intern" role is selected
         {
             type: 'input',
-            name: 'employeeSchool',
+            name: 'school',
             message: 'What school does this team member attend?'
+        },
+
+        // Continue/Finish section
+        {
+            type: 'list',
+            name: 'continueFinish',
+            message: 'What would you like to do now?',
+            choices: ['Add an employee', 'Generate file']
         }
     ])
 
