@@ -1,8 +1,10 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateHTML = require('./utils/generateHTML');
+const generateHTML = require('./src/generateHTML');
 
-const questions = () => {
+const teamArray = [];
+
+const managerQs = () => {
     return inquirer.prompt([
         // Manger section
         // Name section
@@ -26,12 +28,25 @@ const questions = () => {
         // Office Number section
         {
             type: 'input',
-            name: 'office',
+            name: 'officeNumber',
             message: 'What is their office number?'
         }
+    ])
 
-    .then(console.log('Please enter the information for the next team member.'))
-        
+    // add answers to teamArray
+    .then(managerAns => {
+        const {name, id, email, officeNumber} = managerAns;
+        const teamManager = new Manager (name, id, email, officeNumber);
+
+        // push teamManager to teamArray
+        teamArray.push(teamManager);
+    })
+};
+
+const employeeQs = () => {
+    // inform the user that they are inputting information for a team member
+    console.log('Please enter to information for a new team member.');
+    return inquirer.prompt([
         // Employee section
         // Role selection
         {
@@ -63,14 +78,16 @@ const questions = () => {
         // GitHub section, if "engineer" role is selected
         {
             type: 'input',
-            name: 'gitHub',
-            message: 'What is their GitHub username?'
+            name: 'github',
+            message: 'What is their GitHub username?',
+            when: (ans) => ans.role === "Engineer"
         },
         // School section, if "intern" role is selected
         {
             type: 'input',
             name: 'school',
-            message: 'What school does this team member attend?'
+            message: 'What school does this team member attend?',
+            when: (ans) => ans.role === "Intern"
         },
 
         // Continue/Finish section
@@ -82,36 +99,53 @@ const questions = () => {
         }
     ])
 
-    // send data to generateHTML.js
-    .then(data => {
-        return generateHTML(data);
-    })
+    // add answers to teamArray
+    .then(employeeAns => {
+        let {role, name, id, email, github, school} = employeeAns;
+        let teamMember;
 
-    // name the file to index.html
-    .then(generatedIndex => {
-        return writeToFile('index.html', generatedIndex);
-    })
-    
-    // log error is any occur
-    .catch(err => {
-        console.log(err);
+        // if user selected engineer role
+        if (role === "Engineer") {
+            teamMember = new Engineer (role, name, id, email, github)
+        } 
+        // if user selected intern role
+        else {
+            teamMember = new Intern (role, name, id, email, school)
+        }
+
+        // push answers into teamArray
+        teamArray.push(teamMember);
+
+        // if the user wishes to add another employee, restart employeeQs function
+        if (continueFinish === "Add an employee") {
+            return employeeQs(teamArray);
+        } 
+        // if the user is finished
+        else {
+            return teamArray;
+        }
     })
 };
 
-// write html file into ./generated folder
-const writeToFile = (fileName, data) => {
-    fs.writeFile(`./generated/${fileName}`, data, err => {
+// write html file into ./dist folder
+const writeToFile = (data) => {
+    fs.writeFile(`./dist/index.html`, data, err => {
         if (err) {
             throw err;
         };
-        console.log('Your index.html file has been generated.')
+        console.log('Your index.html file has been generated in the dist/ folder.')
     });
-}
+};
 
 // begin questions
 const init = () => {
-    questions();
-}
+    managerQs()
+    .then(employeeQs)
+    .then(teamArray => {
+        return generateHTML(teamArray);
+    })
+    .then(writeToFile());
+};
 
 // call to start app
 init();
