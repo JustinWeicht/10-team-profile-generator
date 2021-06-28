@@ -50,9 +50,7 @@ const managerQs = () => {
 const employeeQs = () => {
     // inform the user that they are inputting information for a team member
     console.log(`
-
-    Please enter the information for a new team member.
-    `);
+Please enter the information for a new team member.`);
     return inquirer.prompt([
         // Employee section
         // Role selection
