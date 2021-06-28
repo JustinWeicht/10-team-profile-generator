@@ -28,5 +28,3 @@
 
   ## Questions
   Created by: [JustinWeicht](https://github.com/JustinWeicht)
-  
-  If you have questions regarding this application, please contact me at: [justinweicht11@gmail.com](justinweicht11@gmail.com)
