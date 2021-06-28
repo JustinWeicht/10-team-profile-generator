@@ -49,7 +49,10 @@ const managerQs = () => {
 
 const employeeQs = () => {
     // inform the user that they are inputting information for a team member
-    console.log('Please enter the information for a new team member.');
+    console.log(`
+
+    Please enter the information for a new team member.
+    `);
     return inquirer.prompt([
         // Employee section
         // Role selection
@@ -105,16 +108,16 @@ const employeeQs = () => {
 
     // add answers to teamArray
     .then(employeeAns => {
-        let {role, name, id, email, github, school} = employeeAns;
+        let {name, role, id, email, github, school, continueFinish} = employeeAns;
         let teamMember;
 
         // if user selected engineer role
         if (role === "Engineer") {
-            teamMember = new Engineer (role, name, id, email, github)
+            teamMember = new Engineer (name, id, email, github)
         } 
         // if user selected intern role
         else {
-            teamMember = new Intern (role, name, id, email, school)
+            teamMember = new Intern (name, id, email, school)
         }
 
         // push answers into teamArray
@@ -148,7 +151,9 @@ const init = () => {
     .then(teamArray => {
         return generateHTML(teamArray);
     })
-    .then(writeToFile());
+    .then(pageHTML => {
+        return writeToFile(pageHTML);
+    })
 };
 
 // call to start app

@@ -1,5 +1,5 @@
 // generate content for HTML using data sent from index.js with classes
-const generateHTML = (manager) => {
+const createManager = (manager) => {
     return `
     <div class="card" style="width: 18rem;">
         <div class="card-body">
@@ -13,12 +13,12 @@ const generateHTML = (manager) => {
     `;
 };
 
-const generateHTML = (engineer) => {
+const createEngineer = (engineer) => {
     return `
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">${engineer.name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">${engineer.role}</h6>     
+            <h6 class="card-subtitle mb-2 text-muted">Engineer</h6>     
             <p class="card-text">ID: ${engineer.id}</p>
             <p class="card-text">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></p>
             <p>GitHub: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></p>
@@ -27,18 +27,50 @@ const generateHTML = (engineer) => {
     `;
 };
 
-const generateHTML = (intern) => {
+const createIntern = (intern) => {
     return `
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">${intern.name}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">${intern.role}</h6>     
+            <h6 class="card-subtitle mb-2 text-muted">Intern</h6>     
             <p class="card-text">ID: ${intern.id}</p>
             <p class="card-text">Email: <a href="mailto:${intern.email}">${intern.email}</a></p>
             <p class="card-text">School: ${intern.school}</p>
         </div>
     </div>
     `;
+};
+
+// loop through array sent from index.js and add classes based on role
+const generateHTML = (data) => {
+    teamArray = []; 
+
+    for (let i = 0; i < data.length; i++) {
+        const employee = data[i];
+        const role = employee.getRole(); 
+
+        // create corresponding cards based on role
+        // manager role
+        if (role === 'Manager') {
+            const managerCard = createManager(employee);
+            teamArray.push(managerCard);
+        }
+        // engineer role
+        if (role === 'Engineer') {
+            const engineerCard = createEngineer(employee);
+            teamArray.push(engineerCard);
+        }
+        // intern role
+        if (role === 'Intern') {
+            const internCard = createIntern(employee);
+            teamArray.push(internCard);
+        }
+    };
+
+    // 
+    const teamCards = teamArray.join('')
+    const createTeam = createHTML(teamCards); 
+    return createTeam;
 };
 
 const createHTML = (teamCards) => {
