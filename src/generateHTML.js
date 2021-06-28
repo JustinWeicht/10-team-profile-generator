@@ -2,7 +2,6 @@
 const generateMarkdown = (data) => {
   return `
   
-  email: [${data.email}](${data.email})
   `;
 }
 
